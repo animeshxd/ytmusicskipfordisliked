@@ -1,5 +1,5 @@
 function handleDislike() {
-    console.log("Content Changed");
+    // console.log("Content Changed");
     const nextButton = document.querySelector('tp-yt-paper-icon-button.next-button');
     const isDisliked = document.querySelector('ytmusic-like-button-renderer[like-status="DISLIKE"]');
 
