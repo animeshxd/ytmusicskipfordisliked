@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "YTMusic Skip if Disliked",
+  "version": "1.0",
+  "description": "NEVER play disliked music",
+  
+  "content_scripts": [
+    {
+      "matches": ["*://music.youtube.com/watch*"],
+      "js": ["skip.js"]
+    }
+  ]
+}
