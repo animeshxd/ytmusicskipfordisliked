@@ -27,6 +27,10 @@ function getTitle() {
     return document.querySelector(".title.ytmusic-player-bar").title
 }
 
+function debug(...args) {
+    // console.debug(...args)
+}
+
 function overrideVideoDisplayWithImage() {
     try {
         //TODO: make it more specific
@@ -49,14 +53,14 @@ function onChange() {
         if (!nextButton && !title) return;
         const containsExcluded = title && excludeTitle.some((r) => !!title.match(r))
         const isDisliked = !!document.querySelector('ytmusic-like-button-renderer[like-status="DISLIKE"]');
-        // console.debug({ containsExcluded, isDisliked, dislikeButton })
+        debug({ containsExcluded, isDisliked, dislikeButton })
         if (containsExcluded && !isDisliked && !!dislikeButton && getTitle() == title) {
             dislikeButton.click();
-            // console.debug("dislikeButton.click()")
+            debug("dislikeButton.click()")
             return;
         }
         if (nextButton != null && isDisliked && getTitle() == title) {
-            // console.debug("nextButton.click()")
+            debug("nextButton.click()")
             nextButton.click();
         }
     } catch (err) {
