@@ -1,6 +1,13 @@
 
+
+/**
+ * @type {RegExp[]}
+ */
 const excludeTitle = [
-    /Jhankar/gmi
+    /Jhankar/gmi,
+    /reverb/gmi,
+    /slowed/gmi,
+    /remix/gmi,
 ]
 
 const debounceTime = 1000;
@@ -27,6 +34,10 @@ function getTitle() {
     return document.querySelector(".title.ytmusic-player-bar").title
 }
 
+function getArtist() {
+    return document.querySelector(".byline.ytmusic-player-bar")?.getAttribute("title");
+}
+
 function debug(...args) {
     // console.debug(...args)
 }
@@ -48,10 +59,11 @@ function onChange() {
         overrideVideoDisplayWithImage()
         const nextButton = document.querySelector('yt-icon-button.next-button.style-scope.ytmusic-player-bar');
         const title = getTitle();
+        const artist = getArtist();
         const dislikeButton = document.querySelector("ytmusic-like-button-renderer.ytmusic-player-bar > #button-shape-dislike > button")
 
         if (!nextButton && !title) return;
-        const containsExcluded = title && excludeTitle.some((r) => !!title.match(r))
+        const containsExcluded = title && excludeTitle.some((r) => !!title.match(r)) || artist && excludeTitle.some((r) => !!artist.match(r));
         const isDisliked = !!document.querySelector('ytmusic-like-button-renderer[like-status="DISLIKE"]');
         debug({ containsExcluded, isDisliked, dislikeButton })
         if (containsExcluded && !isDisliked && !!dislikeButton && getTitle() == title) {
